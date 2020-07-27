@@ -1,2 +1,2 @@
 # github_capstone
-Exercise of setting up github
+For coursera capstone. Works for different weeks are in different branches of the repository.
