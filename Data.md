@@ -14,7 +14,9 @@ Table containing list of London areas
 This table will be scraped from the following Wikipedia page: https://en.wikipedia.org/wiki/List_of_areas_of_London
 This will be used as it is a useful table sorting different areas in London by borough. The scraping process is shown below
 With BeautifulSoup, the table is scraped from the URL and originally would look like the one in the image below:
-![](/images/スクリーンショット (85).png)
+
+![](images/screenshot(85).png)
+
 This table will then be cleaned by dropping unnecessary columns, renaming columns, removing unnecessary letters.
 Some rows contains multiple boroughs, so they will be separated and stacked on another dataframe, which will be joined back to make duplicate rows in the original dataframe.
 ![](/images/スクリーンショット (59).png)
