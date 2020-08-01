@@ -77,7 +77,7 @@ The following page contains list of London Boroughs and their statistical inform
 I am going to scrape the table to acquire borough areas. Information about 32 london boroughs were on one table and information about city of london (which I included into this project but is not a borough) was on another, so I scraped them in separate tables and merged later on:
 ![](/images/screenshot(81).png)
 Dropped unneeded columns and joined the borough and city tables together:
-![](/images/screenshot(82).png)
+![](/images/screenshot(92).png)
 Cleaning (stripping) unneeded letters:
 ![](/images/screenshot(83).png)
 Merging it into the original dataframe:
