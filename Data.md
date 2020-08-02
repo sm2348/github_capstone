@@ -193,7 +193,7 @@ Cleaning the dataframe by dropping now unnecessary columns and duplicates:
 
 ![](/images/screenshot(106).png)  
 
-![](/images/screenshot(112).png)  
+![](/images/screenshot(107).png)  
 
 Adding borough latitude and longitude information so I could make cluster circles in folium later on:
 
