@@ -103,7 +103,8 @@ I will be using the area of each London Boroughs (in square miles) to acquire ve
 The following page contains list of London Boroughs and their statistical information: https://en.wikipedia.org/wiki/List_of_London_boroughs  
 I am going to scrape the table to acquire borough areas. Information about 32 london boroughs were on one table and information about city of london (which I included into this project but is not a borough) was on another, so I scraped them in separate tables and merged later on:  
 
-![](/images/screenshot(81).png)  
+dataframe binfo(table_data) contains stats for 32 boroughs of London, and dataframe cinfo(table_data2) contains stats for city of London  
+![](/images/screenshot(113).png)  
 
 Dropped unneeded columns and joined the borough and city tables together:  
 
@@ -157,13 +158,13 @@ Define function to only extract category name from venue.category column and app
 
 ![](/images/screenshot(111).png)  
 
-This worked out fine so defining a function to apply the same operation to all of the datasets. But this time assigning borough name instead of location name for every extracted venues (so venues can be sorted into boroughs with groupby later on):  
+This worked out fine so defining a function to apply the same operation to all of the datasets. But this time assigning borough name instead of location name for every extracted venues (so venues can be sorted into boroughs with groupby later on). This function also creates a dataframe showing total venues of each location:  
 
-![](/images/screenshot(96).png)  
+![](/images/screenshot(114).png)  
 
 Outcome:  
-
-![](/images/screenshot(97).png)  
+lfvenues is the dataframe containing category information, and total_venues is the dataframe containing information about how many venues are extracted from one location.  
+![](/images/screenshot(115).png)  
 
 Doing one hot encoding to find out venue category frequency by location:   
 
@@ -179,21 +180,21 @@ Defining function to retrive most common venues and applying this to each boroug
 
 Calculating total number of venues in each borough:  
 
-![](/images/screenshot(101).png)  
+![](/images/screenshot(117).png)  
 
 Merging the total venue count per borough to the original dataframe containing various borough stats. And then dividing it by borough area(square mile) to get venues density:  
 
-![](/images/screenshot(102).png)  
+![](/images/screenshot(118).png)  
+
+![](/images/screenshot(119).png)  
 
 Merging the dataframe containing most common venue category for each borough to the same dataframe above:  
 
-![](/images/screenshot(105).png)  
+![](/images/screenshot(120).png)  
 
 Cleaning the dataframe by dropping now unnecessary columns and duplicates:  
 
-![](/images/screenshot(106).png)  
-
-![](/images/screenshot(107).png)  
+![](/images/screenshot(121).png)  
 
 Adding borough latitude and longitude information so I could make cluster circles in folium later on:  
 
@@ -205,4 +206,4 @@ Adding the longitude and latitude information to the dataframe containing variou
 
 And now this dataframe contains all the information I will need for my cluster analysis.  
 
-![](/images/screenshot(110).png)  
+![](/images/screenshot(123).png)  
