@@ -88,7 +88,7 @@ Divide crimeOccurence by Population to get rate:
 ### Average house prices in London  
 The following page contains average house prices in London by borough: https://data.london.gov.uk/dataset/average-house-prices  
 One sheet of the excel file will be downloaded as csv. The most recent dataset is from 2017 December, so I will be dropping every column except for that. This data would be ultimately merged into the original dataframe.  
-Average house prices will not be used for the clustering process, but it is important data necessary for 
+Average house price is a important data necessary for 
 discussion and making a conclusion about which boroughs are potentially worth investing in. 
 Reading csv file:  
 
