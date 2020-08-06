@@ -298,7 +298,7 @@ As shown in methodology, the boroughs were separated into 4 different clusters w
 
 The code for this map is:  
 
-![](/images/screenshot(144.png))  
+![](/images/screenshot(144).png)  
 
 The mean average house price and venue density by clusters can be seen from this dataframe:  
 
