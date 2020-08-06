@@ -221,8 +221,8 @@ And now this dataframe contains all the information I will need for my cluster a
 ### 3.	Methodology
 I have prepared all the necessary data in the previous Data section, and this includes the venue data acquired by Foursquare APIs as well. The two dataframe below contains all the data I will need for this analysis:
 
-![](/images/screenshot(99))
-![](/images/screenshot(123))
+![](/images/screenshot(99).png)
+![](/images/screenshot(123).png)
 The first dataframe contains one hot encoded venue categories by borough. The second dataframe contains other statistical information of each borough that will b   e used for analysis.
 I will cluster each borough with K-means clustering method based on different datasets each run. In total there will be three clustering runs: 1. K-means clustering of boroughs based on venue category frequency.   2. K-means clustering of boroughs based on employment rate and crime rates.  3. K-means clustering of boroughs based on average house prices and venue density. K-means clustering will be used as it could group boroughs based on given features, and this will make the process of finding boroughs with specific traits easier. Clustering is also useful when visualising spatial trends of a feature, if there is any. 
 Before clustering, I have noticed that the crime rate in City of London is abnormal, exceeding 100%. This was because that area did not have much residents, therefore I have decided to drop City of London from further exploration.
@@ -230,24 +230,28 @@ Before clustering, I have noticed that the crime rate in City of London is abnor
 #### 3.1	K-means clustering based on venue category frequency
 
 The first dataframe will be used in this section (London_grouped). To prepare for k-means clustering I will make a dataframe containing one-hot-encoded venue category frequency data, while dropping the columns containing borough names. This dataframe will be named “london_grouped_clustering_venue_diversity”. This dataframe will initially be casted on k-means clustering with a for loop, changing the number of clusters every loop. This is done to draw a graph showing distortions of each clustering process to identify the optimal number of clusters using elbow method.  
-![](/images/screenshot(124))  
+
+![](/images/screenshot(124).png)  
+
 As we can see from the graph, the rate of change in distortion seems to be fairly stable across different number of clusters. Usually the pattern we will see is distortion dropping dramatically over the first few numbers of clusters (e.g 1 - 3), and then further increase in number of clusters only causes minimal distortion drops. In such typical cases the optimal number of clusters will be the point where the rate-of-decrease in distortion drops significantly (according to elbow method). This graph displaying uniform rate of decrease may be indication of poor clustering results. 
 We still have to choose a number of cluster to continue with the k-means clustering, so I set this number to 8 and proceeded. The reason I set the number of clusters to 8 was because the decrease in distortion became less steep after exceeding the number of 8 in the above distortion graph.  
-![](/images/screenshot(127))  
+
+![](/images/screenshot(127).png)  
+
 The cluster labels generated from this k-means clustering is used to create a new dataframe called “venue_diversity”, containing borough names, top 5 common venue categories in the borough. Latitude and longitude values of the borough is added onto this as well to make cluster labels on chloropleth map. Implications of the results would be discussed in the results section.
 #### 3.2	K-means clustering based on employment rate and crime rate
 
 In this set of clustering I will be using the second dataframe (Londonframe). I will be filtering out the crime rate and employment rate data from londonframe to a new dataframe called ‘london_grouped_clustering_security’. Like in 3.1, I will be running k-means clustering with multiple cluster numbers in a for loop to identify what is the optimal cluster number value. Unlike venue category frequency, the distortion graph of these datasets are straightforward, with clearly identifiable elbow point at cluster number of 4. After this point decrease in distortion becomes significantly narrower, indicating that further increase in number of clusters would not benefit k-means accuracy.  
-![](/images/screenshot(128))  
+![](/images/screenshot(128).png)  
 With optimal cluster number identified, k-means clustering will be re-run with this value (4). New dataframe called ‘security’ was made, containing: cluster labels, borough names, employment rate and crime rates of each borough. Borough latitude and longitudes are also added for chloropleth maps.  
-![](/images/screenshot(129))
+![](/images/screenshot(129).png)
 
 #### 3.3	K-means clustering based on average house price and venue density.
 
 In this set of clustering I will be using the second dataframe (Londonframe). I will be filtering out the average house price and venue density datasets to a new dataframe called ‘london_grouped_clustering’. Venue density here means how many venues are present per square mile of a borough. K-means clustering will be repeated with different ‘number of cluster’ values to draw distortion graph. As we can see from the graph, decrease in distortion becomes less steeper after the cluster number of 4. Therefore we can define number of cluster as 4 and proceed with K-means.  
-![](/images/screenshot(130))  
+![](/images/screenshot(130).png)  
 After k-means clustering, new dataframe called ‘london_houseprice_venue’ is made. This contains: cluster labels, borough names, average house price and venue density of each boroughs. Borough latitude and longitudes are also added for chloropleth maps.
-![](/images/screenshot(142))
+![](/images/screenshot(142).png)
 
 
 ### 4.	Results
@@ -255,35 +259,56 @@ In this section I will go over the implications of the clustering results.
 
 #### 4.1	Venue category frequency
 As shown in methodology, the boroughs were separated into 8 clusters when clustered based on venue category frequency. These clusters can be visualized by chloropleth map, which would look like this:  
-![](/images/screenshot(136))  
+
+![](/images/screenshot(136).png)  
+
 The code for this map is:  
-![](/images/screenshot(135))  
+
+![](/images/screenshot(135).png)  
+
 We cannot see any special spatial patterns regarding venue diversity from this map. If we take a look at the dataframe venue_diversity, we can see that there isn’t much variation in venue diversity across boroughs. 
-![](/images/screenshot(137))  
+
+![](/images/screenshot(137).png)  
+
 Most of the boroughs contain the following venue categories in the ‘top 5 most common venue types’: Pub, coffee shop, café, grocery store. This high degree of similarity between boroughs was probably the reason why we could not observe a distortion graph with steep drop. This also means that the clustering of boroughs based on venue diversity was not really successful, since we could not see any significant differences between clusters regarding venue diversity. 
 
 #### 4.2 Employment rate and crime rate
 As shown in methodology, the boroughs were separated into 4 clusters when clustered based on venue category frequency. These clusters can be visualized by chloropleth map, which would look like this:  
-![](/images/screenshot(139))  
+
+![](/images/screenshot(139).png)  
+
 The code for this map is:  
-![](/images/screenshot(138))  
+
+![](/images/screenshot(138).png)  
+
 The mean crime rate and employment rate of each cluster is summarized in the following table:  
-![](/images/screenshot(140))  
+
+![](/images/screenshot(140).png)  
+
 Clusters 0 and 2 seems to have better security in terms of employment rate and crime rate, compared to other clusters. Especially cluster 2 has the highest employment rate and lowest crime rate amongst other clusters. When we look at the map, the blue circles represent boroughs from cluster 2, while the red circles represent boroughs from cluster 0. Cluster 0 is generally spread across the North side of London, while cluster 2 is spread
 across the south side of London. While in the centre there is cluster 1 solely consisted of Westminster with very high crime rate and the lowest employment rate.  
 The security dataframe sorted by cluster label will look like this:  
-![](/images/screenshot(141))
+
+![](/images/screenshot(141).png)
 
 #### 4.3	Average house price and venue density
 As shown in methodology, the boroughs were separated into 4 different clusters when clustered based on average house price and venue density. These cluster can be visualized by chloropleth map, which would look like this:  
-![](/images/screenshot(143))  
+
+![](/images/screenshot(143).png)  
+
 The code for this map is:  
-![](/images/screenshot(144))  
+
+![](/images/screenshot(144.png))  
+
 The mean average house price and venue density by clusters can be seen from this dataframe:  
-![](/images/screenshot(145))  
+
+![](/images/screenshot(145).png)  
+
 Cluster 2 has the lowest average house price, but it also has the lowest venue density compared to other clusters. Cluster 1 is on the polar opposite of cluster 2, with highest average house price and highest venue density among the other clusters. Cluster 0 and 3 seems to have acceptable venue density and mid-range house prices. Among these two clusters, cluster 3 has higher venue density and slightly higher house prices. 
 If we look at the original dataframe sorted by cluster label,  
-![](/images/screenshot(146))  
+
+![](/images/screenshot(146).png)  
+
 We can see that most of the boroughs belong in cluster 2, where the average house price and venue density is the lowest. There is only 2 boroughs in the very popular cluster 1: Westminster, Kensington and Chelsea. If we look at the chloropleth map again, blue circles represents boroughs from cluster 2, and they generally seem to be situated away from the centre, while the purple (cluster 1) and yellow circles (cluster 3) are more closer to the centre of London. Therefore, it could be said that the general trend is as we get closer to the centre, the areas are more urbanized (with higher venue density) with higher house prices. 
 
 ### 5.	Discussion
@@ -291,15 +316,15 @@ We can see that most of the boroughs belong in cluster 2, where the average hous
 I have used venue density, venue diversity and security (employment rate and crime rate) as indicators of living environment in this project. The way the boroughs were clustered differed a lot depending on which of these factors were taken into account. The clustering by venue diversity did not provide much information about which boroughs have better living environment, probably because the area was too large. Considering venue diversity per borough may have been redundant, as it is very likely that a borough will have large venue diversity due to its large size. This indicator should have been used when investigating more narrow areas such as neighborhoods or districts within a borough. 
 Clustering by venue density and security did differentiate the boroughs more vividly. Since these were clustered separately for better clustering results, I will select boroughs that were in the ‘decent’ clusters for both of these indicators. High employment rate and low crime rate is often desirable as to a certain extent, it is a indicator of security. The clusters with relatively decent employment rate and crime rates were cluster number 2 (employment = 79.0%, crime = 8.1%) and 0 (employment = 73.3%, crime = 9.9%). The crime rate of these cluster is below median when compared with other clusters, and employment rate is also above median. I will filter out the boroughs that match this condition:  
 
-![](/images/screenshot(151))  
+![](/images/screenshot(151).png)  
 
 For house price and venue density, I will filter out clusters 0 (average house price = 507619, venues per square mile = 35.8) and 3 (average house price = 691295, venues per square mile = 93.8). Clusters 1 and 2 will be excluded due to extremely high house prices and extremely low venue density.  
 
-![](/images/screenshot(152))  
+![](/images/screenshot(152).png)  
 
 The boroughs that belong in the filtered clusters for both of the clustering conditions are shown below:  
 
-![](/images/screenshot(153))  
+![](/images/screenshot(153).png)  
 
 While the results show boroughs with potentially good living environment (high venue density, low crime rate and employment rate), boroughs with very low venue density (single digit) such as Harrow and Merton is still included, and this is probably because the clustering of venue density was done together with average house price.   
 
