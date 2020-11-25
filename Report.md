@@ -4,7 +4,7 @@ London is the capital and also the most popular city in United Kingdom. It is a 
 #### 1.2 Target Audience  
 Potential residents.  
 #### 1.3 Problem  and Overview
-Accommodation prices in central and urban London is very high, and this may be daunting to people who are looking to move into London. House prices in suburban areas of London are dramatically cheaper, and thus it maybe more appealing to specific groups of investors or people looking to move into London. Properties in the suburb are cheap, but this comes with a tradeoff of having less access and venues. In this project, I would like to examine how the living environment of each London suburbs differ, from the perspective of average house price, available venues, crime rates and unemployment rates in the area. The main goal of this project is to separate the boroughs of London into clusters of different living environments.
+Accommodation prices in central and urban London is very high, and this may be daunting to people who are looking to move into London. House prices in suburban areas of London are dramatically cheaper, and thus it maybe more appealing to people looking to move into London. Properties in the suburb are cheap, but this comes with a tradeoff of having less access and venues. In this project, I would like to examine how the living environment of each London suburbs differ, from the perspective of average house price, available venues, crime rates and unemployment rates in the area. The main goal of this project is to separate the boroughs of London into clusters of different living environments.
 
 ### 2. Methodology
 Metrics used to cluster boroughs of London will include:
